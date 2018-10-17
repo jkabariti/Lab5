@@ -1,0 +1,91 @@
+---
+title: "Lab5"
+output: html_document
+Author: "Joseph Kabariti"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+A = matrix(1:9, nrow=3)
+b = c(1,2,3)
+
+mat_vec_mult = function(A, b) {
+  n = nrow(A)
+  m = ncol(A)
+  c = matrix(0,n)
+  for(i in 1:n){
+    sum = 0
+    for(j in 1:m){
+      sum = sum + A[i,j] * b[j]
+      
+    }
+    c[i,1] = sum
+  }
+  return(c)
+}
+
+mat_vec_mult(A,b)
+
+A%*%b
+```
+
+```{r}
+dice_game = function(num_of_successes, num_of_tries,die_value){
+#  n = rbinom(y,1,1/6)
+  n = sample(1:6,num_of_tries,replace=TRUE)
+  
+  if(length(n[n==die_value]) == num_of_successes){
+    return("You win!")
+  }
+  else{
+    return("You lose. :(")
+  }
+  
+}
+
+dice_game(1,4,6)
+dice_game(3,6,1)
+```
+
+```{r}
+dice_game = function(num_of_games,num_of_successes, num_of_tries,die_value){
+#  n = rbinom(y,1,1/6)
+success = 0
+  for(i in 1:num_of_games){
+    n = sample(1:6,num_of_tries,replace=TRUE)
+    if(length(n[n==die_value]) == num_of_successes){
+      success = success + 1
+    }
+  }
+  return(paste0("You won the game ", success, " time(s) out of ",num_of_games,", which comes out to a proportion of ",round((success/num_of_games),3),"."))
+}
+
+dice_game(1000,1,4,6)
+dice_game(10000,1,4,6)
+```
+
+```{r}
+smallest_element = function(x){
+  a = x[1]
+  index = 1
+  for(i in 2:length(x)){
+    b = x[i]
+    if(a > b){
+      a = b
+      index = i
+    }
+  }
+  return(c(a, index))
+}
+ 
+smallest_element(c(1,4,2,0,5))
+smallest_element(c(1,4,2,0,5,7,-1))
+smallest_element(c(1,4,2,0,5,7,-3,10))
+```
+
+
+
+
